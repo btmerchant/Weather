@@ -1,3 +1,20 @@
 
 
+#logInForm{
+  background: white;
+  border: 5px black solid;
+  border-radius: 5px;
+  text-align: center;
+  opacity: .65;
+  width: 50%;
+  margin-left: 23%;
+}
+
+body{
+  background-color: ;
+background-image: url( http://vefego.com/i/rain-hd-wallpaper-17i411.jpg);
+background-repeat: no-repeat;
+background-size: cover; 
+}
+
 /*# sourceMappingURL=main.css.map */
