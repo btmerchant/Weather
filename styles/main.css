@@ -1,18 +1,18 @@
 
 
 #logInForm{
-  background: transparent;
+  background: white;
+  border: 5px black solid;
+  border-radius: 5px;
   text-align: center;
-}
-
-.borderThings{
-	background: transparent;
-  text-align: center;
+  opacity: .65;
+  width: 50%;
+  margin-left: 23%;
 }
 
 body{
   background-color: ;
-background-image: url( https://33.media.tumblr.com/29f26b4633ce9324eee48fce48e31431/tumblr_nih2pja1YC1twuv7fo1_500.gif);
+background-image: url( http://vefego.com/i/rain-hd-wallpaper-17i411.jpg);
 background-repeat: no-repeat;
 background-size: cover; 
 }
