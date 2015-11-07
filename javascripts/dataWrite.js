@@ -3,7 +3,7 @@ define(function(require) {
   var q = require("q");
 
   return {
-    getFirebase: function () {
+    putFirebase: function () {
       var deferred = q.defer();
       $.ajax({
         url:"https://chanceofrain.firebaseio.com/"
