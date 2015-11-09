@@ -28,6 +28,9 @@ require(
 zipCode = 37205;
 $(document).on("click", "#submitZip", function() {
   zipCode =$("#zipCode").val();
+  var isValidUSZip = function(zipCode) {
+        return /^\d{5}(-\d{4})?$/.test(zipCode);
+      };
   apiCall.getWeather(zipCode)
     .then(function(weather) {
       console.log('weather', weather);
