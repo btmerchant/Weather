@@ -20,8 +20,8 @@ requirejs.config({
 });
 
 require(
-  ["jquery", "lodash", "q", "bootstrap", "firebase", "dataCall", "dataWrite", "apiCall"],
-  function($, _, q, bootstrap, firebase, dataCall, dataWrite, apiCall) {
+  ["jquery", "lodash", "q", "bootstrap", "firebase", "dataCall", "dataWrite", "apiCall", "loginSignUp"],
+  function($, _, q, bootstrap, firebase, dataCall, dataWrite, apiCall, loginSignUp) {
 
 //Initialize material design for project
 // $.material.init();
@@ -40,13 +40,13 @@ $(document).on("click", "#submitZip", function() {
 
 dataWrite.putFirebase()
     .then(function(weather){
-      console.log("Put Weather= ", weather);
+      // console.log("Put Weather= ", weather);
 
     });
 
 dataCall.getFirebase()
     .then(function(weather) {
-      console.log('Get Weather= ', weather);
+      // console.log('Get Weather= ', weather);
       // newMembers = profileData;
       // console.log('newMembers', newMembers);
     // $('#profileDisplay').append(memTempl({newMembers: profileData}));

@@ -9,7 +9,7 @@ define(function(require) {
         url:"https://chanceofrain.firebaseio.com/"
       }).done(function(fireWeather) {
         deferred.resolve(fireWeather);
-        console.log("fireWeather = ", fireWeather);
+        // console.log("fireWeather = ", fireWeather);
       })// End of ajax call
         .fail(function(xhr, status, error) {
           deferred.reject(error);
