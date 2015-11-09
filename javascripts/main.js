@@ -23,36 +23,42 @@ require(
   ["jquery", "lodash", "q", "bootstrap", "firebase", "dataCall", "dataWrite", "apiCall", "loginSignUp"],
   function($, _, q, bootstrap, firebase, dataCall, dataWrite, apiCall, loginSignUp) {
 
-//Initialize material design for project
-// $.material.init();
-zipCode = 37205;
-$(document).on("click", "#submitZip", function() {
-  zipCode =$("#zipCode").val();
-  var isValidUSZip = function(zipCode) {
-        return /^\d{5}(-\d{4})?$/.test(zipCode);
-      };
-  apiCall.getWeather(zipCode)
-    .then(function(weather) {
-      console.log('weather', weather);
-      // $("#returnData")html("hello");
-    });
-});
+
+  zipCode = 37205;
+  $(document).on("click", "#submitZip", function() {
+    zipCode =$("#zipCode").val();
+   if (checkZip(zipCode)) {
+      apiCall.getWeather(zipCode)
+        .then(function(weather) {
+          console.log('weather', weather);
+          // $("#returnData")html("hello");
+        });
+    }
+    else {
+          alert('Please Enter A Valid Zipcode');
+    }
+  });
+
+  // var firebaseRef = new Firebase("https://chanceofrain.firebaseio.com/");
 
 
-// var firebaseRef = new Firebase("https://chanceofrain.firebaseio.com/");
+  dataWrite.putFirebase()
+      .then(function(weather){
+        console.log("Put Weather= ", weather);
 
-dataWrite.putFirebase()
-    .then(function(weather){
-      // console.log("Put Weather= ", weather);
 
-    });
+      });
 
-dataCall.getFirebase()
-    .then(function(weather) {
-      // console.log('Get Weather= ', weather);
-      // newMembers = profileData;
-      // console.log('newMembers', newMembers);
-    // $('#profileDisplay').append(memTempl({newMembers: profileData}));
-    });
+
+  dataCall.getFirebase()
+      .then(function(weather) {
+        console.log('Get Weather= ', weather);
+        // newMembers = profileData;
+        // console.log('newMembers', newMembers);
+      // $('#profileDisplay').append(memTempl({newMembers: profileData}));
+      });
+  function checkZip(value) {
+      return (/(^\d{5}$)|(^\d{5}-\d{4}$)/).test(value);
+    }
 
 });
