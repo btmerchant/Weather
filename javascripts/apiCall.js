@@ -7,7 +7,7 @@ define(function(require) {
     getWeather: function (zipCode) {
       var zip = zipCode;
       var deferred = q.defer();
-      var wapi = "http://api.openweathermap.org/data/2.5/weather?zip=" + zip + ",us&APPID=e5de7a42bba3199987cd541f1f5220ea";
+      var wapi = "http://api.openweathermap.org/data/2.5/weather?zip=" + zip + ",us&APPID=e5de7a42bba3199987cd541f1f5220ea&units=imperial";
       $.ajax({
         url:wapi
       }).done(function(weather) {
