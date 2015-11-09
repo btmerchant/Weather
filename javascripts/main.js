@@ -3,13 +3,12 @@ requirejs.config({
   baseUrl: "./javascripts",
   paths:{
     "jquery": "../lib/bower_components/jquery/dist/jquery.min",
-    // "hbs": "../lib/bower_components/require-handlebars-plugin/hbs",
+    "hbs": "../lib/bower_components/require-handlebars-plugin/hbs",
     "bootstrap": "../lib/bower_components/bootstrap/dist/js/bootstrap.min",
     "firebase" : "../lib/bower_components/firebase/firebase",
     "lodash" : "../lib/bower_components/lodash/lodash.min",
     // "material": "../lib/bower_components/bootstrap-material-design/dist/js/material.min",
     'q': '../lib/bower_components/q/q'
-
   },
   shim: {
     "bootstrap": ["jquery"],
@@ -20,12 +19,19 @@ requirejs.config({
 });
 
 require(
-  ["jquery", "lodash", "q", "bootstrap", "firebase", "dataCall", "dataWrite", "apiCall"],
-  function($, _, q, bootstrap, firebase, dataCall, dataWrite, apiCall) {
+  ["jquery", "lodash", "q", "bootstrap", "firebase", "dataCall", "dataWrite", "apiCall", "loginSignUp", "hbs!../templates/weather"],
+  function($, _, q, bootstrap, firebase, dataCall, dataWrite, apiCall, loginSignUp, weatherHBS) {
 
     //Sign Up view
+  $(document).on("click", "#swLogIn", function() {
+    $("#logInView").show();
+    $("#landingView").hide();
+  });
 
-
+   $(document).on("click", "#swSignUp", function() {
+    $("#signUpView").show();
+    $("#landingView").hide();
+  });
 
   zipCode = 37205;
   $(document).on("click", "#submitZip", function() {
@@ -34,7 +40,9 @@ require(
       apiCall.getWeather(zipCode)
         .then(function(weather) {
           console.log('weather', weather);
-          // $("#returnData")html("hello");
+          $("#zipSearchView").hide();
+          $("#mainContentView").show();
+          $('#mainContent').append(weatherHBS({weather: weatherData}));
         });
     }
     else {
@@ -47,7 +55,6 @@ require(
   dataWrite.putFirebase()
       .then(function(weather){
         console.log("Put Weather= ", weather);
-
       });
 
   dataCall.getFirebase()
@@ -60,5 +67,4 @@ require(
   function checkZip(value) {
       return (/(^\d{5}$)|(^\d{5}-\d{4}$)/).test(value);
     }
-
 });
