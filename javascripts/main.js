@@ -23,33 +23,42 @@ require(
   ["jquery", "lodash", "q", "bootstrap", "firebase", "dataCall", "dataWrite", "apiCall"],
   function($, _, q, bootstrap, firebase, dataCall, dataWrite, apiCall) {
 
-//Initialize material design for project
-// $.material.init();
-zipCode = 37205;
-$(document).on("click", "#submitZip", function() {
-  zipCode =$("#zipCode").val();
-  apiCall.getWeather(zipCode)
-    .then(function(weather) {
-      console.log('weather', weather);
-      // $("#returnData")html("hello");
-    });
-});
+    //Sign Up view
 
 
-// var firebaseRef = new Firebase("https://chanceofrain.firebaseio.com/");
 
-dataWrite.putFirebase()
-    .then(function(weather){
-      console.log("Put Weather= ", weather);
+  zipCode = 37205;
+  $(document).on("click", "#submitZip", function() {
+    zipCode =$("#zipCode").val();
+   if (checkZip(zipCode)) {
+      apiCall.getWeather(zipCode)
+        .then(function(weather) {
+          console.log('weather', weather);
+          // $("#returnData")html("hello");
+        });
+    }
+    else {
+          alert('Please Enter A Valid Zipcode');
+    }
+  });
 
-    });
+  // var firebaseRef = new Firebase("https://chanceofrain.firebaseio.com/");
 
-dataCall.getFirebase()
-    .then(function(weather) {
-      console.log('Get Weather= ', weather);
-      // newMembers = profileData;
-      // console.log('newMembers', newMembers);
-    // $('#profileDisplay').append(memTempl({newMembers: profileData}));
-    });
+  dataWrite.putFirebase()
+      .then(function(weather){
+        console.log("Put Weather= ", weather);
+
+      });
+
+  dataCall.getFirebase()
+      .then(function(weather) {
+        console.log('Get Weather= ', weather);
+        // newMembers = profileData;
+        // console.log('newMembers', newMembers);
+      // $('#profileDisplay').append(memTempl({newMembers: profileData}));
+      });
+  function checkZip(value) {
+      return (/(^\d{5}$)|(^\d{5}-\d{4}$)/).test(value);
+    }
 
 });
