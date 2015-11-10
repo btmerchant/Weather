@@ -20,8 +20,8 @@ requirejs.config({
 });
 
 require(
-  ["jquery", "lodash", "q", "bootstrap", "firebase", "oauth", "hbs", "dataCall", "dataWrite", "apiCall", "loginSignUp", "hbs!../templates/weather"],
-  function($, _, q, bootstrap, firebase, oauth, handlebars, dataCall, dataWrite, apiCall, loginSignUp, weatherHBS) {
+  ["jquery", "lodash", "q", "bootstrap", "firebase", "oauth", "hbs", "dataCall", "dataWrite", "apiCall", "loginSignUp", "currentWeather"],
+  function($, _, q, bootstrap, firebase, oauth, handlebars, dataCall, dataWrite, apiCall, loginSignUp, currentWeather) {
   // Working on getting OAuth to work
   // OAuth.initialize('Lj4QOB73DKmntRgtPjY3_-rDiN0');
 
@@ -36,16 +36,19 @@ require(
     $("#landingView").hide();
   });
 
-  zipCode = 37205;
+  zipCode = 37122;
+  var globalWeather;
   $(document).on("click", "#submit3", function() {
     zipCode =$("#zipCode").val();
    if (checkZip(zipCode)) {
       apiCall.getWeather(zipCode)
         .then(function(weather) {
           console.log('weather', weather);
+          globalWeather = weather;
           $("#zipSearchView").hide();
           $("#mainContentView").show();
-          $('#mainContent').append(weatherHBS({weather3: weatherData}));
+          // $('#mainContent').append(weatherHBS({weather3: weatherData}));
+          currentWeather.populateWeather(globalWeather);
         });
     }
     else {
@@ -61,7 +64,7 @@ require(
           console.log('weather', weather);
           $("#zipSearchView").hide();
           $("#mainContentView").show();
-          $('#mainContent').append(weatherHBS({weather7: weatherData}));
+          currentWeather.populateWeather(globalWeather);
         });
     }
     else {

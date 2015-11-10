@@ -14,6 +14,16 @@ body {
   background-repeat: no-repeat;
   background-size: cover; }
 
+#makePretty {
+  background: white;
+  border: 5px black solid;
+  border-radius: 7px;
+  text-align: center;
+  opacity: .65;
+  width: 50%;
+  margin-left: 23%;
+  margin-top: 3%; }
+
 /*# sourceMappingURL=main.css.map */
 
 /*# sourceMappingURL=main.css.map */
